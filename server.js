@@ -13,38 +13,8 @@ db.once('open', () => {
 //parse requests from json string to objects 
 app.use(express.json());
 
-//sample in-memory database
-const posts = [
-    { id: 1, title: 'Post 1'},
-    { id: 2, title: 'Post 2'},
-    { id: 3, title: 'Post 3'}
-];
-let id=4;
-
-
-app.get('/', (req, res) => {
-    res.send('Hello World!');
-});
-
-//functions to handle different requests at the /posts endpoint
-app.get('/posts', (req, res) => {
-    res.json(posts);
-});
-
-app.post('/posts', (req, res) => {
-    const post = { id:id, title:req.body.title };
-    id++;
-    posts.push(post);
-    res.send('Post added successfully');
-    console.log('Post added to the database.');
-});
-
-app.delete('/posts' , (req, res) => {
-    posts.pop();
-    id--;
-    res.send('post removed successfully');
-    console.log('post removed from the database.');
-});
+//handle the routes
+app.use(require('./routes.js'));
 
 //start the server
 const port = 3000;
