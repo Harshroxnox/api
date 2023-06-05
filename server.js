@@ -10,7 +10,7 @@ db.once('open', () => {
     console.log('Connected to database successfully');
 });
 
-//parse requests to json 
+//parse requests from json string to objects 
 app.use(express.json());
 
 //sample in-memory database
