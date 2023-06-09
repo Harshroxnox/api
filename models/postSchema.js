@@ -1,9 +1,9 @@
 const mongoose = require('mongoose');
 
 const postSchema = new mongoose.Schema({
-    PostId: Number,
+    PostId: String,
     Title: String,
     Body: String
 });
 
-module.exports = studentSchema.model('student', postSchema);
+module.exports = mongoose.model('post', postSchema);

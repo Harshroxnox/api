@@ -2,6 +2,8 @@ const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
 
+
+//connect to the mongodb database
 mongoose.connect('mongodb://localhost:27017/postsdb');
 
 const db = mongoose.connection;
@@ -10,11 +12,20 @@ db.once('open', () => {
     console.log('Connected to database successfully');
 });
 
+
 //parse requests from json string to objects 
 app.use(express.json());
 
-//handle the routes
-app.use(require('./routes.js'));
+
+//route for my homepage
+app.get('/', (req, res) => {
+    res.send('Welcome to my rest API!');
+});
+
+
+//handle the posts routes
+app.use('/posts' ,require('./router/posts.js'));
+
 
 //start the server
 const port = 3000;
